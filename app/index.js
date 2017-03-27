@@ -4,10 +4,13 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 import Routes from './components/Routes'
+import App from 'grommet/components/App';
 
 
 
 
 ReactDOM.render(
-  <Routes />, document.getElementById('app')
+ <App>
+     <Routes />
+     </App>, document.getElementById('app')
 );

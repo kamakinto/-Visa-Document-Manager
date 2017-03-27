@@ -16,8 +16,24 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: ["react-hot","babel-loader"]
+            },
+            {
+                test: /\.css$/,
+                loaders: [ 'style-loader', 'css-loader' ]
+            },
+            {
+                test: /\.scss$/,
+                loader: 'style!css!sass?outputStyle=compressed'
             }
 
+        ]
+    },
+    sassLoader:{
+        includePaths: [
+            './node_modules'
+            // this is required only for NPM < 3.
+            // Dependencies are flat in NPM 3+ so pointing to
+            // the internal grommet/node_modules folder is not needed
         ]
     },
     output: { //Where you want the output saved

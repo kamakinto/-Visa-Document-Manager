@@ -10,6 +10,7 @@ import Admin from './Admin'
 import Home from './Home'
 import Documentation from './Documentation'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
+import 'grommet/grommet.min.css'
 
 class Routes extends React.Component {
 
