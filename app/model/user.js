@@ -11,10 +11,10 @@ var UserSchema = new Schema({
     last_name: String,
     email: String,
     gender: String,
-    dob:Date,
+    dob:String,
     phone_number: String,
     visa_type:String,
-    appointment_date: Date,
+    appointment_date: String,
     documents: [{oid:String}]
 
 });

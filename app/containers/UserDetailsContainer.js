@@ -18,7 +18,6 @@ import Footer from 'grommet/components/Footer';
 import Label from 'grommet/components/Label';
 import Select from 'grommet/components/Select';
 import GromButton from 'grommet/components/Button';
-import Fieldset from 'grommet/components/FormFields';
 
 
 
@@ -26,7 +25,8 @@ import Fieldset from 'grommet/components/FormFields';
 
 var React = require('react');
 var axios = require('axios');
-var userDetailsHelpers = require('../services/UserServices')
+var userDetailsHelpers = require('../services/UserServices');
+var documentServices = require('../services/DocumentServices');
 var moment = require('moment');
 
 
@@ -68,7 +68,7 @@ class UserDetailsContainer extends React.Component {
         this.updateDocumentState = this.updateDocumentState.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
         this.editDocument = this.editDocument.bind(this);
-        this.saveDocument = this.saveDocument.bind(this);
+        this.updateDocument = this.updateDocument.bind(this);
     }
 
   close() {
@@ -76,9 +76,15 @@ class UserDetailsContainer extends React.Component {
       }
 
     updateDocumentState(event){
+        console.log("contents of event in updateDocumentState", event.option);
+        console.log("event target value", event.target.value);
+        console.log("event target name", event.target.name);
+
+
+
         const field = event.target.name;
         const document = this.state.editDocument;
-        event.option !== '' ?
+            event.option ?
             document[field] = event.option
         :
             document[field] = event.target.value;
@@ -107,8 +113,11 @@ class UserDetailsContainer extends React.Component {
             showForm: true})
     }
 
-    saveDocument(document){
-        console.log('saving document', document);
+    updateDocument(document){
+        document.preventDefault();
+        console.log('saving document', this.state.editDocument);
+        documentServices.updateDocument(this.state.editDocument);
+        this.close();
     }
 
     componentDidMount() {
@@ -132,7 +141,7 @@ class UserDetailsContainer extends React.Component {
                     <Label>Reference ID: {this.state.editDocument._id}</Label>
                 <fieldset>
                     <FormField label="Name">
-                        <GromTextInput defaultValue={this.state.editDocument.name} onDOMChange={this.updateDocumentState}/>
+                        <GromTextInput name="name" defaultValue={this.state.editDocument.name} onDOMChange={this.updateDocumentState}/>
                     </FormField>
                </fieldset>
 
@@ -179,7 +188,7 @@ class UserDetailsContainer extends React.Component {
                                 accent={false}
                                 plain={false}
                                 type='submit'
-                                onClick={this.saveDocument}/>
+                                onClick={this.updateDocument}/>
 
                         <GromButton label='Cancel'
                                 primary={false}

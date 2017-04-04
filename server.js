@@ -178,19 +178,27 @@ router.get('/documents/:document_id', function(req, res) {
 
 router.put('/documents/:document_id', function(req, res) {
     // update document. put a switch statement to allow for a specific type of update
-    Document.findById(req.params.document_id, function (err, document) {
+    Document.findOne({'uuid': req.params.document_id}, function (err, document) {
         if(err) {
             res.send('Could not update the document with id ' + req.params.document_id + ':'
             , err);
         } else {
+            console.log("contents of the request body", req.body);
             document.name = req.body.name;
-            document.status = req.body.doc_status;
-            document.due_date = req.body.date;
+            document.status = req.body.status;
+            document.due_date = req.body.due_date;
             document.condition =  req.body.condition;
             //add logic for appending comments
             document.comments === ''
                 ? document.comments = req.body.comments
-                : documents.comments = documents.comments + req.body.comments ;
+                : document.comments = document.comments + req.body.comments ;
+
+            //Save the Document
+            document.save(function (err) {
+                if (err)
+                    res.send(err);
+                res.json({message: 'document has been updated'});
+            });
         }
     })
 });

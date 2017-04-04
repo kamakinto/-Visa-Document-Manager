@@ -10,7 +10,7 @@ var DocumentSchema = new Schema({
     uuid: String,
     name: String,
     status: String,
-    due_date: Date,
+    due_date: String,
     condition: String,
     comments: String
 
