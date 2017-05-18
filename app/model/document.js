@@ -12,7 +12,13 @@ var DocumentSchema = new Schema({
     status: String,
     due_date: String,
     condition: String,
-    comments: String
+    comments: [{
+        author_id: String,
+        author_name: String,
+        timestamp: String,
+        comment: String,
+        photo_url: String
+    }]
 
 });
 

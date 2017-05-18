@@ -6,6 +6,17 @@ var React = require('react');
 var transparentBg = require('../styles').transparentBg
 import Button from 'react-bootstrap/lib/Button'
 import axios from 'axios';
+import Headline from 'grommet/components/Headline';
+import Box from 'grommet/components/Box';
+import DocumentIcon from 'grommet/components/icons/base/DocumentCloud';
+import GlobeIcon from 'grommet/components/icons/base/Globe';
+import ComplianceIcon from 'grommet/components/icons/base/Compliance';
+import DownIcon from 'grommet/components/icons/base/Down';
+import Pulse from 'grommet/components/icons/Pulse'
+
+
+
+import Footer from 'grommet/components/Footer';
 
 class Home extends React.Component {
 
@@ -37,16 +48,25 @@ class Home extends React.Component {
         return (
             <div>
                 <div className="jumbotron col-sm-12 text-center" style={transparentBg}>
-                    <h1> Welcome </h1>
-                    <p className="lead">Your Document Champion</p>
-                    Your time is precious. Let us help you manage your prefecture documentation.
-                    <br />
-                    <br />
+                    <Headline size="large" strong={true}>Proper Papers</Headline>
+                    <Headline size="small">Managing your documents can be a pain. Let us help you.</Headline>
 
-                    <Button bsStyle="primary">Learn More</Button>
-                    <br />
-                    <hr />
-                    {this.state.apiTest}
+                    <Box direction="row" full="horizontal" justify="center" align="center"
+                         pad={{vertical: "medium"}} responsive={false} >
+
+                        <DocumentIcon size="xlarge" colorIndex="neutral-3" />
+
+                        <GlobeIcon size="xlarge" colorIndex="neutral-2" />
+
+                        <ComplianceIcon size="xlarge" colorIndex="neutral-3" />
+                    </Box>
+</div>
+                <div>
+                    <Footer justify="center" align="center">
+                        <Pulse icon={<DownIcon />} />
+
+                    </Footer>
+
                     </div>
 
 
